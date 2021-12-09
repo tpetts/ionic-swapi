@@ -19,11 +19,12 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.swapiSvc.loadPlanets().subscribe(
       data => {
-        console.log(data);
+  
         this.planets = [
           ...this.planets
           , ...data.results
         ];
+        console.log(this.planets);
       }
         , err => console.error(err)
     );
