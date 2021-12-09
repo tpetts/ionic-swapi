@@ -20,6 +20,10 @@ export class HomePage implements OnInit {
     this.swapiSvc.loadPlanets().subscribe(
       data => {
         console.log(data);
+        this.planets = [
+          ...this.planets
+          , ...data.results
+        ];
       }
         , err => console.error(err)
     );
