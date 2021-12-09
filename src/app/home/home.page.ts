@@ -8,6 +8,10 @@ import { SwapiService } from '../swapi.service';
 })
 export class HomePage implements OnInit {
 
+  planets: {
+    name: string;
+  }[] = [];
+
   constructor(
     private swapiSvc: SwapiService
   ) {}
