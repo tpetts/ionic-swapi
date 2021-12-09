@@ -19,6 +19,6 @@ export class SwapiService {
   ) { }
 
   loadPlanets = (): Observable<SwapiPlanetDataWeCareAbout> => {
-    
+    const page1 = this.httpSvc.get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets');
   };
 }
