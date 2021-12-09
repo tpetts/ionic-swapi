@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
           ...this.planets
           , ...data.results
         ].sort(
-          (a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase())
+          (a, b) => a.name.localeCompare(b.name)
         );
         console.log(this.planets);
       }
