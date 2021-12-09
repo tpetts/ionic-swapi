@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-interface swapiPlanetDataWeCareAbout {
-  next: String;
+interface SwapiPlanetDataWeCareAbout {
+  next: string;
   results: {
-    name: String;
+    name: string;
   }[];
 }
 
@@ -17,7 +18,7 @@ export class SwapiService {
     private httpSvc: HttpClient
   ) { }
 
-  loadPlanets = () => {
+  loadPlanets = (): Observable<SwapiPlanetDataWeCareAbout> => {
     
   };
 }
