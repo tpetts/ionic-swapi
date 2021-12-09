@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, merge, pipe } from 'rxjs';
-import { repeat, tap, map } from 'rxjs/operators';
+import { Observable, pipe, EMPTY } from 'rxjs';
+import { tap, map, expand } from 'rxjs/operators';
 
 interface SwapiPlanetDataWeCareAbout {
   next: string;
@@ -20,9 +20,12 @@ export class SwapiService {
   ) { }
 
   loadPlanets = (): Observable<SwapiPlanetDataWeCareAbout> => {
-    const page1 = this.httpSvc.get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets');
-    return (
-      page1
-    );
+    const page1 = this.httpSvc.get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets')
+      .pipe(
+        expand(x => x.next ? this.httpSvc.get<SwapiPlanetDataWeCareAbout>(x.next) : EMPTY)
+      )
+    ;
+
+    return page1;
   };
 }
