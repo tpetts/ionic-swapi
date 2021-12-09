@@ -12,5 +12,7 @@ export class HomePage implements OnInit {
     private swapiSvc: SwapiService
   ) {}
 
-
+  ngOnInit() {
+    
+  }
 }
