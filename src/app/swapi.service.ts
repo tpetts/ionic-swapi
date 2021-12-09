@@ -21,24 +21,8 @@ export class SwapiService {
 
   loadPlanets = (): Observable<SwapiPlanetDataWeCareAbout> => {
     const page1 = this.httpSvc.get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets');
-    const page2 = this.httpSvc
-      .get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets/?page=2')
-      .pipe(
-        tap(x => console.log(x))
-        , repeat(3)
-        , map(x => ({
-            next: x.next
-            , results: x.results.map(y => ({
-              name: y.name
-          }))
-        }))
-        , tap(x => console.log(x))
-      )
-      ;
-
-    return merge(
+    return (
       page1
-      , page2
     );
   };
 }
