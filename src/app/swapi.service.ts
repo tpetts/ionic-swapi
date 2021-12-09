@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 
 interface SwapiPlanetDataWeCareAbout {
   next: string;
@@ -20,7 +20,11 @@ export class SwapiService {
 
   loadPlanets = (): Observable<SwapiPlanetDataWeCareAbout> => {
     const page1 = this.httpSvc.get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets');
+    const page2 = this.httpSvc.get<SwapiPlanetDataWeCareAbout>('https://swapi.dev/api/planets/?page=2');
 
-    return page1;
+    return merge(
+      page1
+      , page2
+    );
   };
 }
